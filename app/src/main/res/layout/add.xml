@@ -18,7 +18,7 @@
                 android:id="@+id/add_producer_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Producer:"
+                android:text="@string/producer"
                 android:textSize="30sp" />
 
             <Space
@@ -41,7 +41,7 @@
                 android:id="@+id/add_model_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Model:"
+                android:text="@string/model"
                 android:textSize="30sp" />
 
             <Space
@@ -65,7 +65,7 @@
                 android:id="@+id/add_rim_size_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rim size:"
+                android:text="@string/rim_size"
                 android:textSize="30sp" />
 
             <Space
@@ -89,7 +89,7 @@
                 android:id="@+id/add_price_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Price:"
+                android:text="@string/price"
                 android:textSize="30sp" />
 
             <Space
@@ -114,7 +114,7 @@
                 android:id="@+id/add_add_new_button"
                 android:layout_width="200dp"
                 android:layout_height="70dp"
-                android:text="Add new tyre" />
+                android:text="@string/add_new_tyre" />
         </TableRow>
     </LinearLayout>
 

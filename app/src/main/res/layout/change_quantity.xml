@@ -19,7 +19,7 @@
                 android:id="@+id/text_product_id_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Product ID:"
+                android:text="@string/product_id"
                 android:textSize="30sp" />
 
             <Space
@@ -42,7 +42,7 @@
                 android:id="@+id/quantity_change_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Change:"
+                android:text="@string/change"
                 android:textSize="30sp" />
 
             <Space
@@ -67,7 +67,7 @@
                 android:id="@+id/change_quantity_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Change quantity" />
+                android:text="@string/change_quantity" />
         </TableRow>
     </LinearLayout>
 

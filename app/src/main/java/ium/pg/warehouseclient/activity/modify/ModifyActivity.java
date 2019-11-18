@@ -19,6 +19,10 @@ public class ModifyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.modify);
 
+        setUpButton();
+    }
+
+    private void setUpButton() {
         Button button = this.findViewById(R.id.modify_modify_tyre_button);
         button.setOnClickListener(view -> {
             Tyre tyre = getTyre();

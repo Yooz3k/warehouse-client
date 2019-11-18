@@ -14,7 +14,7 @@
             android:id="@+id/button_show_by_id"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:text="Show by ID" />
+            android:text="@string/show_by_id" />
 
         <Space
             android:layout_width="match_parent"
@@ -24,7 +24,7 @@
             android:id="@+id/button_show_all"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:text="Show all" />
+            android:text="@string/show_all" />
 
         <Space
             android:layout_width="wrap_content"
@@ -34,7 +34,7 @@
             android:id="@+id/button_add"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:text="Add" />
+            android:text="@string/add" />
 
         <Space
             android:layout_width="match_parent"
@@ -44,7 +44,7 @@
             android:id="@+id/button_modify"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:text="Modify" />
+            android:text="@string/modify" />
 
         <Space
             android:layout_width="match_parent"
@@ -54,7 +54,7 @@
             android:id="@+id/button_change_quantity"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:text="Change quantity" />
+            android:text="@string/change_quantity" />
 
         <Space
             android:layout_width="match_parent"
@@ -64,7 +64,7 @@
             android:id="@+id/button_delete"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:text="Delete" />
+            android:text="@string/delete" />
 
         <Space
             android:layout_width="match_parent"

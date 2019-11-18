@@ -17,6 +17,10 @@ public class ChangeQuantityActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.change_quantity);
 
+        setUpButton();
+    }
+
+    private void setUpButton() {
         Button button = this.findViewById(R.id.change_quantity_button);
         button.setOnClickListener(view -> {
             EditText idInput = this.findViewById(R.id.change_quantity_id_input);

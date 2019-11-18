@@ -19,7 +19,7 @@
                 android:id="@+id/text_product_id_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Product ID:"
+                android:text="@string/product_id"
                 android:textSize="30sp" />
 
             <Space
@@ -43,7 +43,7 @@
                 android:id="@+id/delete_by_id_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Delete" />
+                android:text="@string/delete" />
         </TableRow>
     </LinearLayout>
 

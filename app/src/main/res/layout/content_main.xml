@@ -25,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Login"
+                android:hint="@string/login"
                 android:inputType="text" />
         </TableRow>
 
@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:inputType="textPassword" />
         </TableRow>
 
@@ -52,7 +52,7 @@
                 android:id="@+id/log_in_button"
                 android:layout_width="200dp"
                 android:layout_height="70dp"
-                android:text="Log in" />
+                android:text="@string/sign_in" />
         </TableRow>
 
         <TableRow

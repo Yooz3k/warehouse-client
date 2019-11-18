@@ -17,6 +17,10 @@ public class DeleteByIdActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.delete_by_id);
 
+        setUpButton();
+    }
+
+    private void setUpButton() {
         Button button = this.findViewById(R.id.delete_by_id_button);
         button.setOnClickListener(view -> {
             EditText inputText = this.findViewById(R.id.delete_by_id_input);

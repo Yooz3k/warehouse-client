@@ -19,6 +19,10 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add);
 
+        setUpButton();
+    }
+
+    private void setUpButton() {
         Button button = this.findViewById(R.id.add_add_new_button);
         button.setOnClickListener(view -> {
             Tyre tyre = getTyre();

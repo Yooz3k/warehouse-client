@@ -17,6 +17,10 @@ public class FindByIdActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.find_by_id);
 
+        setUpButton();
+    }
+
+    private void setUpButton() {
         Button button = this.findViewById(R.id.find_by_id_button);
         button.setOnClickListener(view -> {
             EditText inputText = this.findViewById(R.id.find_by_id_input);
