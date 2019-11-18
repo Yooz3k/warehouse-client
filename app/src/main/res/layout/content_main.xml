@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,67 +11,61 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="40dp">
 
-        <Button
-            android:id="@+id/button_show_by_id"
+        <TableRow
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:text="Show by ID" />
+            android:gravity="center_horizontal">
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="25dp" />
+            <EditText
+                android:id="@+id/log_in_login_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Login"
+                android:inputType="text" />
+        </TableRow>
 
-        <Button
-            android:id="@+id/button_show_all"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:text="Show all" />
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="25dp" />
-
-        <Button
-            android:id="@+id/button_add"
+        <TableRow
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:text="Add" />
+            android:gravity="center_horizontal">
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="25dp" />
+            <EditText
+                android:id="@+id/log_in_password_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textPassword" />
+        </TableRow>
 
-        <Button
-            android:id="@+id/button_modify"
+        <TableRow
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:text="Modify" />
+            android:layout_height="100dp"
+            android:gravity="center_horizontal">
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="25dp" />
+            <Button
+                android:id="@+id/log_in_button"
+                android:layout_width="200dp"
+                android:layout_height="70dp"
+                android:text="Log in" />
+        </TableRow>
 
-        <Button
-            android:id="@+id/button_change_quantity"
+        <TableRow
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:text="Change quantity" />
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="25dp" />
-
-        <Button
-            android:id="@+id/button_delete"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:text="Delete" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="25dp" />
+            <Button
+                android:id="@+id/log_in_google_button"
+                android:layout_width="200dp"
+                android:layout_height="70dp"
+                android:text="Log in with Google" />
+        </TableRow>
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

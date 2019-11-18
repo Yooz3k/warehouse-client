@@ -1,10 +1,10 @@
 package ium.pg.warehouseclient.activity.deletebyid;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AppCompatActivity;
 import ium.pg.warehouseclient.R;
 import ium.pg.warehouseclient.rest.RequestController;
 

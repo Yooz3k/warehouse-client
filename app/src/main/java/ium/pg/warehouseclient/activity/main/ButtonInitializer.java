@@ -12,16 +12,16 @@ import ium.pg.warehouseclient.activity.findbyid.FindByIdActivity;
 import ium.pg.warehouseclient.activity.modify.ModifyActivity;
 import ium.pg.warehouseclient.rest.RequestController;
 
-class ButtonInitializer {
+public class ButtonInitializer {
 
     private final Activity activity;
     private final RequestController requestController = new RequestController();
 
-    ButtonInitializer(Activity activity) {
+    public ButtonInitializer(Activity activity) {
         this.activity = activity;
     }
 
-    void execute() {
+    public void execute() {
         setUpButtonShowAll();
         setUpButtonShowSingle();
         setUpButtonAdd();
@@ -31,7 +31,6 @@ class ButtonInitializer {
     }
 
     private void setUpButtonShowAll() {
-        //TODO: odczyt tablicy, nie pojedynczego elementu JSON
         Button button = activity.findViewById(R.id.button_show_all);
         button.setOnClickListener(view -> requestController.getAll(activity));
     }

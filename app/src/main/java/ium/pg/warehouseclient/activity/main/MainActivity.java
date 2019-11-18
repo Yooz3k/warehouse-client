@@ -1,14 +1,19 @@
 package ium.pg.warehouseclient.activity.main;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import ium.pg.warehouseclient.R;
+import ium.pg.warehouseclient.rest.RequestController;
 
 public class MainActivity extends AppCompatActivity {
+
+    private final RequestController requestController = new RequestController();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +22,18 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        setUpButtons();
+        Button logInButton = findViewById(R.id.log_in_button);
+        logInButton.setOnClickListener(view -> {
+            EditText inputLogin = this.findViewById(R.id.log_in_login_input);
+            String login = String.valueOf(inputLogin.getText());
+
+            EditText inputPassword = this.findViewById(R.id.log_in_password_input);
+            String password = String.valueOf(inputPassword.getText());
+
+            requestController.login(login, password, this);
+        });
+        Button logInGoogleButton = findViewById(R.id.log_in_google_button);
+        //Intent i przejscie do innego activity w przypadku sukcesu
     }
 
     @Override
@@ -40,9 +56,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private void setUpButtons() {
-        new ButtonInitializer(this).execute();
     }
 }

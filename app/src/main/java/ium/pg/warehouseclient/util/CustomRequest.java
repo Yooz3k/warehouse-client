@@ -10,16 +10,17 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.Map;
 
-public class GsonRequest<T> extends Request<T> {
+public class CustomRequest<T> extends Request<T> {
     private final Gson gson = new Gson();
     private final Class<T> clazz;
-    private final Map<String, String> headers;
+    private Map<String, String> headers;
     private final Response.Listener<T> listener;
 
-    public GsonRequest(int method, String url, Class<T> clazz, Map<String, String> headers,
-                       Response.Listener<T> listener, Response.ErrorListener errorListener) {
+    public CustomRequest(int method, String url, Class<T> clazz, Map<String, String> headers,
+                         Response.Listener<T> listener, Response.ErrorListener errorListener) {
         super(method, url, errorListener);
         this.clazz = clazz;
         this.headers = headers;
@@ -30,11 +31,6 @@ public class GsonRequest<T> extends Request<T> {
     public Map<String, String> getHeaders() throws AuthFailureError {
         return headers != null ? headers : super.getHeaders();
     }
-
-//    @Override
-//    public String getBodyContentType() {
-//        return "application/json";
-//    }
 
     @Override
     protected void deliverResponse(T response) {
@@ -53,5 +49,12 @@ public class GsonRequest<T> extends Request<T> {
         } catch (UnsupportedEncodingException | JsonSyntaxException e) {
             return Response.error(new ParseError(e));
         }
+    }
+
+    public void addHeaders(Map<String, String> headers) {
+        if (this.headers == null) {
+            this.headers = new HashMap<>();
+        }
+        this.headers.putAll(headers);
     }
 }
