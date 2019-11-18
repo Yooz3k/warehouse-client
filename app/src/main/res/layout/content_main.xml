@@ -60,11 +60,10 @@
             android:layout_height="match_parent"
             android:gravity="center_horizontal">
 
-            <Button
+            <com.google.android.gms.common.SignInButton
                 android:id="@+id/log_in_google_button"
                 android:layout_width="200dp"
-                android:layout_height="70dp"
-                android:text="Log in with Google" />
+                android:layout_height="70dp"/>
         </TableRow>
     </LinearLayout>
 

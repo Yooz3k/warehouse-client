@@ -28,7 +28,6 @@
         <activity android:name=".activity.modify.ModifyActivity" />
         <activity android:name=".activity.changequantity.ChangeQuantityActivity" />
         <activity android:name=".activity.warehousemanagement.WarehouseManagementActivity" />
-        <activity android:name=".activity.login.LogInActivity" />
     </application>
 
 </manifest>

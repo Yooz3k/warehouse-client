@@ -32,6 +32,7 @@ public class RequestController {
     private final static String SERVER_URL = "https://1aab3ed9.ngrok.io/";
     private final static String RESOURCE_PATH = "tyres/";
     private final static String LOGIN_PATH = "auth/login";
+    private final static String GOOGLE_LOGIN_PATH = "auth/google/login";
 
     private final static int DEFAULT_TIMEOUT_MILLIS = 10000;
 
@@ -72,6 +73,44 @@ public class RequestController {
                             "Failed to log in!", Toast.LENGTH_LONG).show();
                     Log.i("Error", getErrorFromResponse(error));
                 });
+        disableRetryingAndIncreaseTimeout(request);
+        requestQueue.add(request);
+    }
+
+    public void verifyGoogleToken(String idToken, Activity activity) {
+        String url = SERVER_URL + GOOGLE_LOGIN_PATH;
+
+        JSONObject json = new JSONObject();
+        try {
+            json.put("idToken", idToken);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        requestQueue = Volley.newRequestQueue(activity);
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, json,
+                response -> {
+                    Toast.makeText(activity.getApplicationContext(),
+                            "Logged in successfully!", Toast.LENGTH_LONG).show();
+                    Log.i("Auth", "Logged in");
+
+                    try {
+                        addTokenToSharedPref(activity, response);
+                        Intent intent = new Intent(activity, WarehouseManagementActivity.class);
+                        activity.startActivity(intent);
+                    } catch (JSONException ex) {
+                        Toast.makeText(activity.getApplicationContext(),
+                                "Failed to log in!", Toast.LENGTH_LONG).show();
+                        Log.e("Auth", ex.getMessage());
+                    }
+                },
+                error -> {
+                    Toast.makeText(activity.getApplicationContext(),
+                            "Failed to log in!", Toast.LENGTH_LONG).show();
+                    Log.i("Error", getErrorFromResponse(error));
+                });
+        disableRetryingAndIncreaseTimeout(request);
         requestQueue.add(request);
     }
 
@@ -232,8 +271,12 @@ public class RequestController {
     }
 
     private String getErrorFromResponse(VolleyError error) {
-        byte[] responseData = error.networkResponse.data;
-        return responseData != null ? new String(responseData, StandardCharsets.UTF_8) : "Unknown error has occured!";
+        if (error != null && error.networkResponse != null) {
+            byte[] responseData = error.networkResponse.data;
+            return responseData != null ? new String(responseData, StandardCharsets.UTF_8) : "Unknown error has occured!";
+        }
+
+        return "Connection error!";
     }
 
     private void addLogInResultToSharedPref(Activity activity, boolean success) {
