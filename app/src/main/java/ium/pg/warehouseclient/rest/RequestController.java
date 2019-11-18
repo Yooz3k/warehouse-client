@@ -2,7 +2,6 @@ package ium.pg.warehouseclient.rest;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
@@ -23,9 +22,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-import ium.pg.warehouseclient.activity.warehousemanagement.WarehouseManagementActivity;
+import ium.pg.warehouseclient.auth.LogInHandler;
 import ium.pg.warehouseclient.domain.Tyre;
 import ium.pg.warehouseclient.util.CustomRequest;
+import ium.pg.warehouseclient.util.SharedPreferencesNames;
 
 public class RequestController {
 
@@ -36,6 +36,7 @@ public class RequestController {
 
     private final static int DEFAULT_TIMEOUT_MILLIS = 10000;
 
+    private LogInHandler logInHandler = new LogInHandler();
     private RequestQueue requestQueue;
 
     public void login(String login, String password, Activity activity) {
@@ -53,26 +54,8 @@ public class RequestController {
         requestQueue = Volley.newRequestQueue(activity);
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, json,
-                response -> {
-                    Toast.makeText(activity.getApplicationContext(),
-                            "Logged in successfully!", Toast.LENGTH_LONG).show();
-                    Log.i("Auth", "Logged in");
-
-                    try {
-                        addTokenToSharedPref(activity, response);
-                        Intent intent = new Intent(activity, WarehouseManagementActivity.class);
-                        activity.startActivity(intent);
-                    } catch (JSONException ex) {
-                        Toast.makeText(activity.getApplicationContext(),
-                                "Failed to log in!", Toast.LENGTH_LONG).show();
-                        Log.e("Auth", ex.getMessage());
-                    }
-                },
-                error -> {
-                    Toast.makeText(activity.getApplicationContext(),
-                            "Failed to log in!", Toast.LENGTH_LONG).show();
-                    Log.i("Error", getErrorFromResponse(error));
-                });
+                response -> logInHandler.handleSuccess(activity, response),
+                error -> logInHandler.handleFailure(activity, error));
         disableRetryingAndIncreaseTimeout(request);
         requestQueue.add(request);
     }
@@ -90,26 +73,8 @@ public class RequestController {
 
         requestQueue = Volley.newRequestQueue(activity);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, json,
-                response -> {
-                    Toast.makeText(activity.getApplicationContext(),
-                            "Logged in successfully!", Toast.LENGTH_LONG).show();
-                    Log.i("Auth", "Logged in");
-
-                    try {
-                        addTokenToSharedPref(activity, response);
-                        Intent intent = new Intent(activity, WarehouseManagementActivity.class);
-                        activity.startActivity(intent);
-                    } catch (JSONException ex) {
-                        Toast.makeText(activity.getApplicationContext(),
-                                "Failed to log in!", Toast.LENGTH_LONG).show();
-                        Log.e("Auth", ex.getMessage());
-                    }
-                },
-                error -> {
-                    Toast.makeText(activity.getApplicationContext(),
-                            "Failed to log in!", Toast.LENGTH_LONG).show();
-                    Log.i("Error", getErrorFromResponse(error));
-                });
+                response -> logInHandler.handleSuccess(activity, response),
+                error -> logInHandler.handleFailure(activity, error));
         disableRetryingAndIncreaseTimeout(request);
         requestQueue.add(request);
     }
@@ -279,24 +244,9 @@ public class RequestController {
         return "Connection error!";
     }
 
-    private void addLogInResultToSharedPref(Activity activity, boolean success) {
-        SharedPreferences pref = activity.getPreferences(Context.MODE_PRIVATE);
-        pref.edit()
-                .clear()
-                .putBoolean("login_success", success)
-                .commit();
-    }
-
-    private void addTokenToSharedPref(Activity activity, JSONObject response) throws JSONException {
-        SharedPreferences pref = activity.getSharedPreferences("TOKENS", Context.MODE_PRIVATE);
-        pref.edit()
-                .putString("JWT_BEARER", "Bearer " + response.getString("token"))
-                .commit();
-    }
-
     private Map<String, String> getAuthorizationHeaders(Context context) {
-        SharedPreferences pref = context.getSharedPreferences("TOKENS", Context.MODE_PRIVATE);
-        String headerValue = pref.getString("JWT_BEARER", null);
+        SharedPreferences pref = context.getSharedPreferences(SharedPreferencesNames.TOKENS_PREF_NAME, Context.MODE_PRIVATE);
+        String headerValue = pref.getString(SharedPreferencesNames.BEARER_KEY, null);
 
         Map<String, String> headers = new HashMap<>();
         headers.put("Authorization", headerValue);
