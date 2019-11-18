@@ -131,10 +131,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             String idToken = account.getIdToken();
-
             requestController.verifyGoogleToken(idToken, this);
         } catch (ApiException e) {
             Log.w("EXCEPTION", "signInResult:failed code=" + e.getStatusCode());
+            Toast.makeText(getApplicationContext(),
+                    "Error while signing in with Google!", Toast.LENGTH_LONG).show();
+        } catch (NullPointerException e) {
+            Log.w("EXCEPTION", "No ID Token from OAuth request!");
             Toast.makeText(getApplicationContext(),
                     "Error while signing in with Google!", Toast.LENGTH_LONG).show();
         }
