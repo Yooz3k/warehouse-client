@@ -3,6 +3,7 @@
     <string name="action_settings">Settings</string>
     <string name="add_new_tyre">Add new tyre</string>
     <string name="change">Change:</string>
+    <string name="register">Register</string>
     <string name="sign_in">Sign in</string>
     <string name="login">Login</string>
     <string name="password">Password</string>
@@ -22,4 +23,5 @@
     <string name="show_all">Show all</string>
     <string name="show_by_id">Show by ID</string>
     <string name="logout">Logout</string>
+    <string name="back">Back</string>
 </resources>

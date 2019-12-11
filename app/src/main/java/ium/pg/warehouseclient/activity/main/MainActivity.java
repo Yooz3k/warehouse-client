@@ -62,8 +62,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setUpButtons() {
+        setUpRegisterButton();
         setUpLogInButton();
         setUpGoogleLogInButton();
+    }
+
+    private void setUpRegisterButton() {
+        Button button = findViewById(R.id.register_button);
+        button.setOnClickListener(view -> {
+            EditText inputLogin = this.findViewById(R.id.log_in_login_input);
+            String login = String.valueOf(inputLogin.getText());
+
+            EditText inputPassword = this.findViewById(R.id.log_in_password_input);
+            String password = String.valueOf(inputPassword.getText());
+
+            requestController.register(login, password, this);
+        });
     }
 
     private void setUpLogInButton() {
