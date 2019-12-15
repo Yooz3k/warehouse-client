@@ -3,6 +3,7 @@ package ium.pg.warehouseclient.activity.main;
 import android.app.Activity;
 import android.content.Intent;
 import android.widget.Button;
+import android.widget.Toast;
 
 import ium.pg.warehouseclient.R;
 import ium.pg.warehouseclient.activity.add.AddActivity;
@@ -10,12 +11,11 @@ import ium.pg.warehouseclient.activity.changequantity.ChangeQuantityActivity;
 import ium.pg.warehouseclient.activity.deletebyid.DeleteByIdActivity;
 import ium.pg.warehouseclient.activity.findbyid.FindByIdActivity;
 import ium.pg.warehouseclient.activity.modify.ModifyActivity;
-import ium.pg.warehouseclient.rest.RequestController;
+import ium.pg.warehouseclient.persistence.DaoController;
 
 public class ButtonInitializer {
 
     private final Activity activity;
-    private final RequestController requestController = new RequestController();
 
     public ButtonInitializer(Activity activity) {
         this.activity = activity;
@@ -28,11 +28,15 @@ public class ButtonInitializer {
         setUpButtonModify();
         setUpButtonChangeQuantity();
         setUpButtonDelete();
+        setUpButtonSynchronize();
     }
 
     private void setUpButtonShowAll() {
         Button button = activity.findViewById(R.id.button_show_all);
-        button.setOnClickListener(view -> requestController.getAll(activity));
+        button.setOnClickListener(view -> {
+            DaoController daoController = new DaoController(activity);
+            daoController.findAll();
+        });
     }
 
     private void setUpButtonShowSingle() {
@@ -73,6 +77,16 @@ public class ButtonInitializer {
         button.setOnClickListener(view -> {
             Intent intent = new Intent(activity, DeleteByIdActivity.class);
             activity.startActivity(intent);
+        });
+    }
+
+    private void setUpButtonSynchronize() {
+        Button button = activity.findViewById(R.id.button_sync);
+        button.setOnClickListener(view -> {
+            Toast.makeText(activity.getApplicationContext(),
+                    "Starting synchronization...", Toast.LENGTH_LONG).show();
+            DaoController daoController = new DaoController(activity);
+            daoController.synchronize();
         });
     }
 }

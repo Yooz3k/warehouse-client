@@ -8,75 +8,80 @@
     tools:context=".activity.main.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingHorizontal="10dp"
-        android:paddingVertical="40dp">
+        android:layout_height="match_parent">
 
-        <TableRow
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:gravity="center_horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="40dp">
 
-            <EditText
-                android:id="@+id/log_in_login_input"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/login"
-                android:inputType="text" />
-        </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:gravity="center_horizontal">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:gravity="center_horizontal">
+                <EditText
+                    android:id="@+id/log_in_login_input"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/login"
+                    android:inputType="text" />
+            </TableRow>
 
-            <EditText
-                android:id="@+id/log_in_password_input"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/password"
-                android:inputType="textPassword" />
-        </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:gravity="center_horizontal">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:gravity="center_horizontal">
+                <EditText
+                    android:id="@+id/log_in_password_input"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/password"
+                    android:inputType="textPassword" />
+            </TableRow>
 
-            <Button
-                android:id="@+id/register_button"
-                android:layout_width="200dp"
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="center_horizontal">
+
+                <Button
+                    android:id="@+id/register_button"
+                    android:layout_width="200dp"
+                    android:layout_height="70dp"
+                    android:text="@string/register" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:text="@string/register" />
-        </TableRow>
+                android:gravity="center_horizontal">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:gravity="center_horizontal">
+                <Button
+                    android:id="@+id/log_in_button"
+                    android:layout_width="200dp"
+                    android:layout_height="70dp"
+                    android:text="@string/sign_in" />
+            </TableRow>
 
-            <Button
-                android:id="@+id/log_in_button"
-                android:layout_width="200dp"
-                android:layout_height="70dp"
-                android:text="@string/sign_in" />
-        </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal">
-
-            <com.google.android.gms.common.SignInButton
-                android:id="@+id/log_in_google_button"
-                android:layout_width="200dp"
-                android:layout_height="70dp"/>
-        </TableRow>
-    </LinearLayout>
+                <com.google.android.gms.common.SignInButton
+                    android:id="@+id/log_in_google_button"
+                    android:layout_width="200dp"
+                    android:layout_height="70dp" />
+            </TableRow>
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

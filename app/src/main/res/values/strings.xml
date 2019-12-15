@@ -24,4 +24,5 @@
     <string name="show_by_id">Show by ID</string>
     <string name="logout">Logout</string>
     <string name="back">Back</string>
+    <string name="synchronize">Synchronize</string>
 </resources>

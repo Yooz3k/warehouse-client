@@ -8,11 +8,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import ium.pg.warehouseclient.R;
 import ium.pg.warehouseclient.domain.Tyre;
-import ium.pg.warehouseclient.rest.RequestController;
+import ium.pg.warehouseclient.persistence.DaoController;
 
 public class AddActivity extends AppCompatActivity {
-
-    private final RequestController requestController = new RequestController();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +25,8 @@ public class AddActivity extends AppCompatActivity {
         button.setOnClickListener(view -> {
             Tyre tyre = getTyre();
             if (tyre != null) {
-                requestController.add(getTyre(), this);
+                DaoController daoController = new DaoController(this);
+                daoController.add(tyre);
             } else {
                 Toast.makeText(this, "All fields have to be filled", Toast.LENGTH_LONG).show();
             }

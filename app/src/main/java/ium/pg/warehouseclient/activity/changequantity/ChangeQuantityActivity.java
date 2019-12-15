@@ -6,11 +6,9 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import ium.pg.warehouseclient.R;
-import ium.pg.warehouseclient.rest.RequestController;
+import ium.pg.warehouseclient.persistence.DaoController;
 
 public class ChangeQuantityActivity extends AppCompatActivity {
-
-    private final RequestController requestController = new RequestController();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +29,8 @@ public class ChangeQuantityActivity extends AppCompatActivity {
             String changeText = String.valueOf(changeInput.getText());
             int change = Integer.valueOf(changeText);
 
-            requestController.changeQuantity(id, change, this);
+            DaoController daoController = new DaoController(this);
+            daoController.changeQuantity(id, change);
         });
     }
 }

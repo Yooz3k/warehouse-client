@@ -6,11 +6,9 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import ium.pg.warehouseclient.R;
-import ium.pg.warehouseclient.rest.RequestController;
+import ium.pg.warehouseclient.persistence.DaoController;
 
 public class FindByIdActivity extends AppCompatActivity {
-
-    private final RequestController requestController = new RequestController();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +25,8 @@ public class FindByIdActivity extends AppCompatActivity {
             String text = String.valueOf(inputText.getText());
             long id = Long.valueOf(text);
 
-            requestController.getSingle(id, this);
+            DaoController daoController = new DaoController(this);
+            daoController.findById(id);
         });
     }
 }

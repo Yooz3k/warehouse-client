@@ -15,26 +15,33 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import ium.pg.warehouseclient.activity.show.ShowActivity;
 import ium.pg.warehouseclient.auth.LogInHandler;
 import ium.pg.warehouseclient.auth.RegisterHandler;
 import ium.pg.warehouseclient.domain.Tyre;
+import ium.pg.warehouseclient.synchronization.SynchronizationHandler;
 import ium.pg.warehouseclient.util.CustomRequest;
 import ium.pg.warehouseclient.util.SharedPreferencesNames;
 import ium.pg.warehouseclient.util.TyreConverter;
 
 public class RequestController {
 
-    private final static String SERVER_URL = "https://11ca1cc0.ngrok.io/";
+    private final static String SERVER_URL = "https://922b4ab4.ngrok.io/";
     private final static String RESOURCE_PATH = "tyres/";
+    private final static String SYNCHRONIZE_PATH = "tyres/synchronize";
     private final static String REGISTER_PATH = "auth/register";
     private final static String LOGIN_PATH = "auth/login";
     private final static String GOOGLE_LOGIN_PATH = "auth/google/login";
@@ -104,6 +111,33 @@ public class RequestController {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, json,
                 response -> logInHandler.handleSuccess(activity, response),
                 error -> logInHandler.handleFailure(activity, error));
+        disableRetryingAndIncreaseTimeout(request);
+        requestQueue.add(request);
+    }
+
+    public void synchronize(List<Tyre> tyres, Activity activity) {
+        String url = SERVER_URL + SYNCHRONIZE_PATH;
+
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer())
+                .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeDeserializer())
+                .create();
+        JSONArray jsonTyres = new JSONArray();
+        tyres.forEach(tyre -> jsonTyres.put(gson.toJson(tyre)));
+
+        SynchronizationHandler handler = new SynchronizationHandler(activity);
+
+        requestQueue = Volley.newRequestQueue(activity);
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.POST, url, jsonTyres,
+                handler::handleSuccess, handler::handleFailure) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headersSys = super.getHeaders();
+                Map<String, String> headers = getAuthorizationHeaders(activity);
+                headers.putAll(headersSys);
+                return headers;
+            }
+        };
         disableRetryingAndIncreaseTimeout(request);
         requestQueue.add(request);
     }
